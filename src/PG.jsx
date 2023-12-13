@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 const initialSettings = {
   length: 12,
   addUpperCase: true,
@@ -101,7 +101,9 @@ const passwordSet = {
 export default function PG() {
   const [password, setPassword] = useState("");
   const [settings, setSettings] = useState(initialSettings);
-  const [history, setHisory] = useState([]);
+  const [history, setHistory] = useState([{ id: 0, pass: "123" }]);
+
+  useEffect(() => {}, []);
 
   const psetForCurrentSetting = useMemo(() => {
     console.log("change in setting");
@@ -128,6 +130,14 @@ export default function PG() {
     setPassword(newPassword);
   }
 
+  function addHistory() {
+    if (
+      password != "" &&
+      history.filter((ele) => ele.pass == password).length == 0
+    )
+      setHistory([{ id: history.length, pass: password }, ...history]);
+  }
+
   const handleSettingChange = (e) => {
     // console.log(e.target.checked);
     if (e.target.name === "length") {
@@ -142,7 +152,15 @@ export default function PG() {
   return (
     <>
       <div id="pg-container">
-        <input type="text" defaultValue={password} />
+        <input type="text" defaultValue={password} disabled />
+        <button
+          onClick={() => {
+            navigator.clipboard.writeText(password);
+            addHistory();
+          }}
+        >
+          copy
+        </button>
         <button onClick={generate}>Generate</button>
         <div>
           Length:{" "}
@@ -188,6 +206,25 @@ export default function PG() {
             onChange={handleSettingChange}
           />
         </div>
+      </div>
+      <div id="history-container">
+        <h3>History</h3>
+        <ul>
+          {history.map((passEle) => {
+            return (
+              <li key={passEle.id}>
+                {passEle.pass}{" "}
+                <button
+                  onClick={() => {
+                    navigator.clipboard.writeText(password);
+                  }}
+                >
+                  copy
+                </button>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </>
   );

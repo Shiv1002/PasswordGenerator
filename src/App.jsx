@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <Header />
-      <PG></PG>
+      <PG />
       <About />
     </>
   );
