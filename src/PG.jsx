@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import CopyBtn from "./CopyBtn";
+import { Toaster, toast } from "react-hot-toast";
 const initialSettings = {
   length: 12,
   addUpperCase: true,
@@ -128,6 +129,7 @@ export default function PG() {
       newPassword += newChar;
     }
     console.log("Password generated!");
+    toast("Hello World");
     setPassword(newPassword);
   }
 
@@ -152,6 +154,9 @@ export default function PG() {
   };
   return (
     <>
+      <div>
+        <Toaster />
+      </div>
       <div id="pg-container-wrapper">
         <div id="pg-container">
           <div className="input-container">
