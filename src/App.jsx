@@ -6,9 +6,11 @@ import PG from "./PG";
 function App() {
   return (
     <>
-      <Header />
-      <PG />
-      <About />
+      <div className="Main">
+        <Header />
+        <PG />
+        <About />
+      </div>
     </>
   );
 }

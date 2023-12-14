@@ -1,0 +1,147 @@
+@font-face {
+    font-family: 'Itim';
+    src: url('/src/assets/fonts/Itim/Itim-Regular.ttf') format('truetype');
+}
+*{
+    margin: 0;
+    padding: 0;
+}
+:root{
+    font-family:  'Itim';
+    --primary:rgb(82, 0, 255);
+    --secondary:rgb(82,0,255,70%)
+}
+
+.Main{
+    width: 100dvw;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#pg-container-wrapper{
+    color: white;
+    height: 30rem;
+    width: 70rem;
+    border-radius: 30px;
+    display: flex;
+    /* padding: rem; */
+    box-sizing: border-box;
+    font-size: x-large;
+    border: 2px solid var(--secondary);
+    /* overflow: hidden; */
+}
+
+
+#pg-container-wrapper>*{
+    padding: 2rem;
+}
+
+#pg-container{
+flex-grow: 1;
+flex-basis: 50%;
+display: flex;
+flex-direction: column;
+justify-content: space-around;
+box-sizing: border-box;
+background-color: #ffffff;
+color: black;
+border-radius: 30px 0 0 30px ;
+box-shadow: -10px 15px 20px 0px var(--secondary);
+
+}
+
+
+.input-container{
+    flex-grow: 1;
+    flex-basis: 40%;
+    width: 80%;
+}
+
+.setting-container{
+    flex-grow: 1;
+    flex-basis: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.setting-container div{
+width: 100%;
+display: flex;
+justify-content:space-between ;
+}
+
+#history-container{
+flex-grow: 1;
+flex-basis: 40%;
+background-color: var(--secondary);
+fill: white;
+border-radius: 0 30px 30px 0;
+overflow: hidden;
+}
+
+.password-input-container{
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    border: 2px solid black;
+}
+
+.password-input{
+    background-color: #ffffff;
+    color: black;
+    padding: 1rem;
+    font-size: x-large;
+    font-weight: 600;
+    font-family: 'Itim';
+    letter-spacing: 2px;
+    border: 0;
+    flex-grow: 1;
+}
+
+.copy-btn{
+padding:1rem;
+background-color: transparent;
+box-sizing: border-box;
+border: 0;
+fill: inherit
+}
+
+.copy-btn:active svg path{
+    fill: rgb(3, 255, 3);
+}
+.primary-btn{
+margin: 1rem 0;
+padding: 1rem;
+border-radius: 30px;
+font-family: 'Itim';
+font-size: x-large;
+color: white;
+border: 0;
+background-color: var(--secondary);
+}
+
+
+.setting-container .length-input input{
+    border: 1px solid black;
+    border-radius: 8px;
+    box-sizing: border-box;
+    outline: none;
+}
+.setting-container div input{
+    padding: 0.4rem;
+    transform: scale(1.5);
+}
+#history-container>h3{
+    font-size: xxx-large;
+}
+
+li{
+    /* padding: 0; */
+    list-style: none;
+}

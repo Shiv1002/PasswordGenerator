@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
+import CopyBtn from "./CopyBtn";
 const initialSettings = {
   length: 12,
   addUpperCase: true,
@@ -101,7 +102,7 @@ const passwordSet = {
 export default function PG() {
   const [password, setPassword] = useState("");
   const [settings, setSettings] = useState(initialSettings);
-  const [history, setHistory] = useState([{ id: 0, pass: "123" }]);
+  const [history, setHistory] = useState([]);
 
   useEffect(() => {}, []);
 
@@ -151,80 +152,98 @@ export default function PG() {
   };
   return (
     <>
-      <div id="pg-container">
-        <input type="text" defaultValue={password} disabled />
-        <button
-          onClick={() => {
-            navigator.clipboard.writeText(password);
-            addHistory();
-          }}
-        >
-          copy
-        </button>
-        <button onClick={generate}>Generate</button>
-        <div>
-          Length:{" "}
-          <input
-            min={8}
-            max={16}
-            type="number"
-            name="length"
-            value={settings.length}
-            onChange={handleSettingChange}
-          />
+      <div id="pg-container-wrapper">
+        <div id="pg-container">
+          <div className="input-container">
+            <div className="password-input-container">
+              <input
+                className="password-input"
+                type="text"
+                defaultValue={password}
+                disabled
+              />
+              <button
+                onClick={() => {
+                  navigator.clipboard.writeText(password);
+                  addHistory();
+                }}
+                className="copy-btn"
+              >
+                <CopyBtn></CopyBtn>
+              </button>
+            </div>
+
+            <button className="primary-btn" onClick={generate}>
+              Generate
+            </button>
+          </div>
+          <div className="setting-container">
+            <div className="length-input">
+              Length{" "}
+              <input
+                min={8}
+                max={16}
+                type="number"
+                name="length"
+                value={settings.length}
+                onChange={handleSettingChange}
+              />
+            </div>
+            <div style={!settings.addUpperCase ? { opacity: "0.5" } : null}>
+              {" "}
+              <span>Uppercase </span>
+              <input
+                type="checkbox"
+                name="addUpperCase"
+                id=""
+                checked={settings.addUpperCase}
+                onChange={handleSettingChange}
+              />
+            </div>
+            <div style={!settings.addNumbers ? { opacity: "0.5" } : null}>
+              {" "}
+              <span>Numbers</span>
+              <input
+                type="checkbox"
+                name="addNumbers"
+                id=""
+                checked={settings.addNumbers}
+                onChange={handleSettingChange}
+              />
+            </div>
+            <div style={!settings.addSpecialCase ? { opacity: "0.5" } : null}>
+              {" "}
+              <span>Spacial Characters</span>
+              <input
+                type="checkbox"
+                name="addSpecialCase"
+                id=""
+                checked={settings.addSpecialCase}
+                onChange={handleSettingChange}
+              />
+            </div>
+          </div>
         </div>
-        <div>
-          {" "}
-          <span>Uppercase </span>
-          <input
-            type="checkbox"
-            name="addUpperCase"
-            id=""
-            checked={settings.addUpperCase}
-            onChange={handleSettingChange}
-          />
+        <div id="history-container">
+          <h3>History</h3>
+          <ul>
+            {history.map((passEle) => {
+              return (
+                <li key={passEle.id}>
+                  {passEle.pass}{" "}
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText(password);
+                    }}
+                    className="copy-btn"
+                  >
+                    <CopyBtn></CopyBtn>
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
         </div>
-        <div>
-          {" "}
-          <span>Numbers</span>
-          <input
-            type="checkbox"
-            name="addNumbers"
-            id=""
-            checked={settings.addNumbers}
-            onChange={handleSettingChange}
-          />
-        </div>
-        <div>
-          {" "}
-          <span>Spacial Characters</span>
-          <input
-            type="checkbox"
-            name="addSpecialCase"
-            id=""
-            checked={settings.addSpecialCase}
-            onChange={handleSettingChange}
-          />
-        </div>
-      </div>
-      <div id="history-container">
-        <h3>History</h3>
-        <ul>
-          {history.map((passEle) => {
-            return (
-              <li key={passEle.id}>
-                {passEle.pass}{" "}
-                <button
-                  onClick={() => {
-                    navigator.clipboard.writeText(password);
-                  }}
-                >
-                  copy
-                </button>
-              </li>
-            );
-          })}
-        </ul>
       </div>
     </>
   );
