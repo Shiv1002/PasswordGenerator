@@ -129,7 +129,6 @@ export default function PG() {
       newPassword += newChar;
     }
     console.log("Password generated!");
-    toast("Hello World");
     setPassword(newPassword);
   }
 
@@ -155,7 +154,7 @@ export default function PG() {
   return (
     <>
       <div>
-        <Toaster />
+        <Toaster position="bottom-right"/>
       </div>
       <div id="pg-container-wrapper">
         <div id="pg-container">
@@ -167,15 +166,8 @@ export default function PG() {
                 defaultValue={password}
                 disabled
               />
-              <button
-                onClick={() => {
-                  navigator.clipboard.writeText(password);
-                  addHistory();
-                }}
-                className="copy-btn"
-              >
-                <CopyBtn></CopyBtn>
-              </button>
+
+              <CopyBtn password={password} addHistory={addHistory} />
             </div>
 
             <button className="primary-btn" onClick={generate}>
@@ -235,15 +227,7 @@ export default function PG() {
             {history.map((passEle) => {
               return (
                 <li key={passEle.id}>
-                  {passEle.pass}{" "}
-                  <button
-                    onClick={() => {
-                      navigator.clipboard.writeText(password);
-                    }}
-                    className="copy-btn"
-                  >
-                    <CopyBtn></CopyBtn>
-                  </button>
+                  {passEle.pass} <CopyBtn password={password} />
                 </li>
               );
             })}
