@@ -2,7 +2,7 @@ import React from "react";
 const style = {
   background: "linear-gradient(180deg, var(--primary), transparent)",
   backgroundClip: "text",
-  webkitTextFillColor: "transparent",
+  WebkitTextFillColor: "transparent",
   fontSize: "64px",
 };
 
