@@ -90,6 +90,7 @@ overflow: hidden;
     display: flex;
     justify-content: space-between;
     border: 2px solid black;
+    width: max-content;
 }
 
 .password-input{
@@ -135,6 +136,11 @@ background-color: var(--secondary);
 }
 .setting-container div input{
     padding: 0.4rem;
+    height: 3rem;
+  font-size: large;
+}
+
+.setting-container div input[type='checkbox']{
     transform: scale(1.5);
 }
 #history-container>h3{
