@@ -3,13 +3,12 @@ const style = {
   background: "linear-gradient(180deg, var(--primary), transparent)",
   backgroundClip: "text",
   WebkitTextFillColor: "transparent",
-  fontSize: "64px",
 };
 
 export default function Header() {
   return (
-    <h1 id="header" style={style}>
-      Password Generator
-    </h1>
+    <span id="header" style={style}>
+      <strong>Password Generator</strong>
+    </span>
   );
 }

@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import CopyBtn from "./CopyBtn";
 import { Toaster, toast } from "react-hot-toast";
+import bars_icon from "/bars-solid.svg";
 const initialSettings = {
   length: 12,
   addUpperCase: true,
@@ -103,7 +104,17 @@ const passwordSet = {
 export default function PG() {
   const [password, setPassword] = useState("");
   const [settings, setSettings] = useState(initialSettings);
-  const [history, setHistory] = useState([]);
+  const [history, setHistory] = useState([
+    { id: 1, pass: "2323" },
+    { id: 1, pass: "2323" },
+    { id: 1, pass: "2323" },
+    { id: 1, pass: "2323" },
+    { id: 1, pass: "2323" },
+    { id: 1, pass: "2323" },
+    { id: 1, pass: "2323" },
+    { id: 1, pass: "2323" },
+    { id: 1, pass: "2323" },
+  ]);
 
   useEffect(() => {}, []);
 
@@ -155,7 +166,7 @@ export default function PG() {
     <>
       <Toaster position="top-right" />
 
-      <div id="pg-container-wrapper">
+      <div id="pg-container-wrapper" className="show-pg show-history">
         <div id="pg-container">
           <div className="input-container">
             <div className="password-input-container">
@@ -221,16 +232,29 @@ export default function PG() {
           </div>
         </div>
         <div id="history-container">
-          <h3>History</h3>
-          <ul>
-            {history.map((passEle) => {
-              return (
-                <li key={passEle.id}>
-                  {passEle.pass} <CopyBtn password={password} />
-                </li>
-              );
-            })}
-          </ul>
+          <div>History</div>
+          <div className="pass-list">
+            <ul>
+              {history.map((passEle) => {
+                return (
+                  <li key={passEle.id}>
+                    {passEle.pass} <CopyBtn password={password} />
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
+        <div className="nav-container">
+          <i
+            onClick={() => {
+              document
+                .querySelector("#pg-container-wrapper")
+                .classList.toggle("show-pg");
+            }}
+          >
+            <img src={bars_icon} alt="" />
+          </i>
         </div>
       </div>
     </>

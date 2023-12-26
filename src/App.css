@@ -11,7 +11,9 @@
     --primary:#5200ff;
     --secondary:rgb(82,0,255,70%)
 }
-
+#header{
+    font-size: 40px;
+}
 #root{
     width: 100dvw;
     height: 100dvh;
@@ -22,9 +24,11 @@
 }
 
 #pg-container-wrapper{
+    position: relative;
     color: white;
-    height: 30rem;
-    width: 70rem;
+    width: 75%;
+    height: 60%;
+    aspect-ratio: 20/10;
     border-radius: 30px;
     display: flex;
     /* padding: rem; */
@@ -40,6 +44,7 @@
 }
 
 #pg-container{
+    position: relative;
 flex-grow: 1;
 flex-basis: 50%;
 display: flex;
@@ -50,9 +55,15 @@ background-color: #ffffff;
 color: black;
 border-radius: 30px 0 0 30px ;
 box-shadow: -10px 15px 20px 0px var(--secondary);
-
+overflow: hidden;
 }
 
+.nav-container{
+    display: none;
+    position: absolute;
+    top:1rem;
+    right:1rem
+}
 
 .input-container{
     flex-grow: 1;
@@ -81,6 +92,7 @@ background-color: var(--secondary);
 fill: white;
 border-radius: 0 30px 30px 0;
 overflow: hidden;
+box-sizing: border-box;
 }
 
 .password-input-container{
@@ -143,41 +155,123 @@ background-color: var(--secondary);
 .setting-container div input[type='checkbox']{
     transform: scale(1.5);
 }
-#history-container>h3{
-    font-size: xxx-large;
-}
 
-li{
-    /* padding: 0; */
+
+li,ul{
     list-style: none;
+
 }
 
 
-@media screen and (width<576px){
+
+  .pass-list{
+/* box-sizing: border-box;
+ */
+ height: 100%;
+ margin: 1rem 0;
+ padding: 1.3rem;
+ overflow: scroll;
+  }
+
+  @media screen and (width<=992px){
+    :root,input,button{
+        font-size: small !important;
+    }
+    #pg-container-wrapper{
+        font-size: medium;
+    }
+  }
+  @media screen and (width<=786px){
+    :root,input,button{
+        font-size: x-small !important;
+    }
+    #pg-container-wrapper{
+        font-size: small;
+        
+    }
+  }
+  
+  @media screen and (width<=576px){
+    
+    #pg-container-wrapper{
+        
+    }
     
   }
-  @media screen and (width>=576px){
+  @media screen and (width<506px){
+    .nav-container{
+        display: block;
+
+    }
+    #pg-container-wrapper{
+        margin: 1rem;
+        scale: 1.1;
+    }
+    .show-history{
+        #history-container{
+            flex-basis: 100%;
+            border-radius: 30px;
+            padding: 2rem;
+        }
+        #pg-container{
+            box-sizing: border-box;
+            flex-basis: 0%;
+            padding: 0;
+        }
+    }
+    .show-pg{
+        #pg-container{
+            flex-basis: 100%;
+            border-radius: 30px;
+            padding: 2rem;
+        }
+        #history-container{
+            box-sizing: border-box;
+            flex-basis: 0%;
+            padding: 0;
+        }
+    }
+    .password-input-container{
+        width: 100%;
+    }
+  }
+
+
+/* 
+
+.show-pg{
+    #pg-container{
+        flex-basis: 100%;
+        border-radius: 30px;
+    }
+    #history-container{
+        box-sizing: border-box;
+        flex-basis: 0%;
+        padding: 0;
+    }
+}
+.show-history{
+    #history-container{
+        flex-basis: 100%;
+        border-radius: 30px;
+    }
+    #pg-container{
+        box-sizing: border-box;
+        flex-basis: 0%;
+        padding: 0;
+    }
+} */
+*{
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s;
+}
+  /* @media screen and (width>=1200px){
     
-  }
+  } */
   
-  @media screen and (width>=786px){
-   
-  }
   
-  @media screen and (width>=992px){
+  /* @media screen and (width>=1400px){
     
-  }
-  
-  
-  
-  @media screen and (width>=1200px){
-    
-  }
-  
-  
-  @media screen and (width>=1400px){
-    
-  }
+  } */
   
   ::-webkit-scrollbar{
     width: 5px;
