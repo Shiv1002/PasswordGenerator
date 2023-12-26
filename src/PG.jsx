@@ -106,7 +106,9 @@ export default function PG() {
   const [settings, setSettings] = useState(initialSettings);
   const [history, setHistory] = useState([]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    generate();
+  }, []);
 
   const psetForCurrentSetting = useMemo(() => {
     console.log("change in setting");
