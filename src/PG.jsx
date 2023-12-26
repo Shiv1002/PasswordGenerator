@@ -153,9 +153,8 @@ export default function PG() {
   };
   return (
     <>
-      <div>
-        <Toaster position="bottom-right"/>
-      </div>
+      <Toaster position="top-right" />
+
       <div id="pg-container-wrapper">
         <div id="pg-container">
           <div className="input-container">

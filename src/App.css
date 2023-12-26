@@ -12,7 +12,7 @@
     --secondary:rgb(82,0,255,70%)
 }
 
-.Main{
+#root{
     width: 100dvw;
     height: 100dvh;
     display: flex;
@@ -151,3 +151,39 @@ li{
     /* padding: 0; */
     list-style: none;
 }
+
+
+@media screen and (width<576px){
+    
+  }
+  @media screen and (width>=576px){
+    
+  }
+  
+  @media screen and (width>=786px){
+   
+  }
+  
+  @media screen and (width>=992px){
+    
+  }
+  
+  
+  
+  @media screen and (width>=1200px){
+    
+  }
+  
+  
+  @media screen and (width>=1400px){
+    
+  }
+  
+  ::-webkit-scrollbar{
+    width: 5px;
+    background-color: transparent;
+  }
+  ::-webkit-scrollbar-thumb{
+    background-color: rgb(200, 200, 200);
+    border-radius: 1rem;
+  }
