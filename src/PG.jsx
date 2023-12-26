@@ -104,17 +104,7 @@ const passwordSet = {
 export default function PG() {
   const [password, setPassword] = useState("");
   const [settings, setSettings] = useState(initialSettings);
-  const [history, setHistory] = useState([
-    { id: 1, pass: "2323" },
-    { id: 1, pass: "2323" },
-    { id: 1, pass: "2323" },
-    { id: 1, pass: "2323" },
-    { id: 1, pass: "2323" },
-    { id: 1, pass: "2323" },
-    { id: 1, pass: "2323" },
-    { id: 1, pass: "2323" },
-    { id: 1, pass: "2323" },
-  ]);
+  const [history, setHistory] = useState([]);
 
   useEffect(() => {}, []);
 
@@ -129,6 +119,12 @@ export default function PG() {
   }, [settings]);
 
   function generate() {
+    if (settings.length < 8 || settings.length > 16) {
+      toast.error("Password length must be in range of 8 and 16", {
+        duration: 4000,
+      });
+      return;
+    }
     let newPassword = "";
     //setting new Password
     for (var i = 0; i < settings.length; i++) {
@@ -156,7 +152,7 @@ export default function PG() {
     if (e.target.name === "length") {
       setSettings({
         ...settings,
-        [e.target.name]: Math.min(Math.max(e.target.value, 8), 16),
+        [e.target.name]: e.target.value,
       });
       return;
     }

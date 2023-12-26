@@ -61,8 +61,7 @@ overflow: hidden;
 .nav-container{
     display: none;
     position: absolute;
-    top:1rem;
-    right:1rem
+    right: 0;
 }
 
 .input-container{
@@ -115,6 +114,7 @@ box-sizing: border-box;
     letter-spacing: 2px;
     border: 0;
     flex-grow: 1;
+    overflow: hidden;
 }
 
 .copy-btn{
@@ -123,6 +123,7 @@ background-color: transparent;
 box-sizing: border-box;
 border: 0;
 fill: inherit
+
 }
 
 .copy-btn:active svg path{
@@ -175,37 +176,26 @@ li,ul{
 
   @media screen and (width<=992px){
     :root,input,button{
-        font-size: small !important;
+        font-size: medium !important;
     }
     #pg-container-wrapper{
         font-size: medium;
     }
   }
   @media screen and (width<=786px){
-    :root,input,button{
-        font-size: x-small !important;
+    :root,input{
+        font-size: small !important;
     }
     #pg-container-wrapper{
-        font-size: small;
+        font-size: medium;
         
     }
   }
   
   @media screen and (width<=576px){
-    
-    #pg-container-wrapper{
-        
-    }
-    
-  }
-  @media screen and (width<506px){
     .nav-container{
         display: block;
 
-    }
-    #pg-container-wrapper{
-        margin: 1rem;
-        scale: 1.1;
     }
     .show-history{
         #history-container{
@@ -234,33 +224,18 @@ li,ul{
     .password-input-container{
         width: 100%;
     }
+    
   }
 
+  @media screen and (width<506px){
+    
+    #pg-container-wrapper{
+        margin: 1rem;
+        scale: 1.1;
+    }
+    
+  }
 
-/* 
-
-.show-pg{
-    #pg-container{
-        flex-basis: 100%;
-        border-radius: 30px;
-    }
-    #history-container{
-        box-sizing: border-box;
-        flex-basis: 0%;
-        padding: 0;
-    }
-}
-.show-history{
-    #history-container{
-        flex-basis: 100%;
-        border-radius: 30px;
-    }
-    #pg-container{
-        box-sizing: border-box;
-        flex-basis: 0%;
-        padding: 0;
-    }
-} */
 *{
     transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s;
 }
