@@ -1,7 +1,9 @@
 import React, { useEffect, useMemo, useState } from "react";
-import CopyBtn from "./CopyBtn";
+
 import { Toaster, toast } from "react-hot-toast";
 import bars_icon from "/bars-solid.svg";
+import CopyBtn from "./CopyBtn";
+import LoginComp from "./LoginComp";
 const initialSettings = {
   length: 12,
   addUpperCase: true,
@@ -162,6 +164,7 @@ export default function PG() {
   };
   return (
     <>
+      <LoginComp />
       <Toaster position="top-right" />
 
       <div id="pg-container-wrapper" className="show-pg show-history">
