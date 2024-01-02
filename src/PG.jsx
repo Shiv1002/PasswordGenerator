@@ -239,7 +239,7 @@ export default function PG() {
               {history.map((passEle) => {
                 return (
                   <li key={passEle.id}>
-                    {passEle.pass} <CopyBtn password={password} />
+                    {passEle.pass} <CopyBtn password={passEle.pass} />
                   </li>
                 );
               })}
