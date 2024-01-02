@@ -3,10 +3,11 @@ import styled from "styled-components";
 import "./App.css";
 import { googleLogout, useGoogleLogin } from "@react-oauth/google";
 import toast from "react-hot-toast";
+import { getPassword, addPassword } from "./Actions.js";
 
-export default function GoogleAuthButton({ getPass, addPass, setHistory }) {
+export default function GoogleAuthButton({ state, dispatch }) {
   const [user, setUser] = useState(null);
-  const [profile, setProfile] = useState(null);
+  const { profile } = state;
 
   const login = useGoogleLogin({
     onSuccess: (res) => setUser(res),
@@ -17,17 +18,20 @@ export default function GoogleAuthButton({ getPass, addPass, setHistory }) {
   useEffect(() => {
     if (!profile) return;
     const fetchUserPassword = async () => {
-      await getPass(profile.email)
+      await getPassword(profile.email)
         .then((data) => {
-          setHistory(
-            data.passwords.map((ele, index) => {
-              return { id: index, pass: ele };
-            })
-          );
+          dispatch({
+            type: "setHistory",
+            payload: data.passwords.map((ele, index) => {
+              return { id: ele.id, pass: ele.pass };
+            }),
+          });
         })
         .catch((e) => console.log(e.message));
     };
     fetchUserPassword();
+
+    return () => {};
   }, [profile]);
 
   useEffect(() => {
@@ -46,7 +50,9 @@ export default function GoogleAuthButton({ getPass, addPass, setHistory }) {
         .then((res) => res.json())
         .then((data) => {
           toast.success("User logged!", { position: "top-center" });
-          setProfile(data);
+          //set profile
+          // to ui profile data
+          dispatch({ type: "setProfile", payload: data });
         })
         .catch((e) => {
           toast.error("Something went wrong!", { position: "top-center" });
@@ -71,8 +77,8 @@ export default function GoogleAuthButton({ getPass, addPass, setHistory }) {
               console.log("logging out!!");
               toast.success("logged out!", { position: "top-center" });
               googleLogout();
-              setProfile(null);
-              setHistory([]);
+
+              dispatch({ type: "setProfile", payload: null });
             }}
           >
             Logout

@@ -3,6 +3,7 @@ const tc_pass = "kym mall";
 
 export const getPassword = async (email) => {
   return new Promise(async (resolve, reject) => {
+    if (!email) reject("email undefined!");
     await fetch("http://localhost:1212/get-password", {
       method: "POST",
       headers: {
@@ -18,6 +19,8 @@ export const getPassword = async (email) => {
 
 export const addPassword = async (email, password) => {
   return new Promise(async (resolve, reject) => {
+    if (!email) reject("email undefined!");
+    if (!password) reject("password undefined!");
     await fetch("http://localhost:1212/add-password", {
       method: "POST",
       headers: {
