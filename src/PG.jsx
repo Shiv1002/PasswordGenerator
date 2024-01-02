@@ -3,13 +3,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Toaster, toast } from "react-hot-toast";
 import bars_icon from "/bars-solid.svg";
 import CopyBtn from "./CopyBtn";
-import LoginComp from "./LoginComp";
-const initialSettings = {
-  length: 12,
-  addUpperCase: true,
-  addSpecialCase: true,
-  addNumbers: true,
-};
+import { addPassword } from "./Actions";
 
 const passwordSet = {
   Uppercase: [
@@ -103,10 +97,10 @@ const passwordSet = {
   ],
 };
 
-export default function PG() {
+export default function PG({ state, dispatch }) {
   const [password, setPassword] = useState("");
-  const [settings, setSettings] = useState(initialSettings);
-  const [history, setHistory] = useState([]);
+
+  const { history, settings } = state;
 
   useEffect(() => {
     generate();
@@ -145,26 +139,37 @@ export default function PG() {
 
   function addHistory() {
     if (
-      password != "" &&
-      history.filter((ele) => ele.pass == password).length == 0
+      password === "" ||
+      history.filter((ele) => ele.pass == password).length != 0
     )
-      setHistory([{ id: history.length, pass: password }, ...history]);
+      return;
+    const newPass = { id: history.length, pass: password };
+    dispatch({ type: "setHistory", payload: [newPass] });
+
+    if (!state.profile) return;
+    addPassword(state.profile.email, newPass)
+      .then((res) => console.log(res))
+      .catch((e) => console.log(e.massage));
   }
 
   const handleSettingChange = (e) => {
     // console.log(e.target.checked);
     if (e.target.name === "length") {
-      setSettings({
-        ...settings,
-        [e.target.name]: e.target.value,
+      dispatch({
+        type: "setSettings",
+        payload: { target: "length", value: e.target.value },
       });
       return;
     }
-    setSettings({ ...settings, [e.target.name]: e.target.checked });
+
+    dispatch({
+      type: "setSettings",
+      payload: { target: [e.target.name], value: e.target.checked },
+    });
   };
+
   return (
     <>
-      <LoginComp />
       <Toaster position="top-right" />
 
       <div id="pg-container-wrapper" className="show-pg show-history">
