@@ -4,6 +4,7 @@ import { Toaster, toast } from "react-hot-toast";
 import bars_icon from "/bars-solid.svg";
 import CopyBtn from "./CopyBtn";
 import LoginComp from "./LoginComp";
+import { getPassword, addPassword } from "./Actions.js";
 const initialSettings = {
   length: 12,
   addUpperCase: true,
@@ -162,9 +163,14 @@ export default function PG() {
     }
     setSettings({ ...settings, [e.target.name]: e.target.checked });
   };
+
   return (
     <>
-      <LoginComp />
+      <LoginComp
+        getPass={getPassword}
+        addPass={addPassword}
+        setHistory={setHistory}
+      />
       <Toaster position="top-right" />
 
       <div id="pg-container-wrapper" className="show-pg show-history">
