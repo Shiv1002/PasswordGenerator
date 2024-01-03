@@ -31,7 +31,9 @@ export default function GoogleAuthButton({ state, dispatch }) {
     };
     fetchUserPassword();
 
-    return () => {};
+    return () => {
+      dispatch({ type: "reset" });
+    };
   }, [profile]);
 
   useEffect(() => {
@@ -78,7 +80,7 @@ export default function GoogleAuthButton({ state, dispatch }) {
               toast.success("logged out!", { position: "top-center" });
               googleLogout();
 
-              dispatch({ type: "setProfile", payload: null });
+              dispatch({ type: "reset" });
             }}
           >
             Logout

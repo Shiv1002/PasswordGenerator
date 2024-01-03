@@ -20,5 +20,10 @@ export function StateReducer(state, { type, payload }) {
       return { ...state, settings: { ...state.settings, [target]: value } };
     case "setHistory":
       return { ...state, history: [...payload, ...state.history] };
+    case "reset":
+      return { ...initialState };
+    default:
+      console.log("No such actions");
+      return { ...state };
   }
 }

@@ -149,7 +149,7 @@ export default function PG({ state, dispatch }) {
     if (!state.profile) return;
     addPassword(state.profile.email, newPass)
       .then((res) => console.log(res))
-      .catch((e) => console.log(e.massage));
+      .catch((e) => console.log(e));
   }
 
   const handleSettingChange = (e) => {
