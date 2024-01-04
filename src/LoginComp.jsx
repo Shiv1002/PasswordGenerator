@@ -70,7 +70,7 @@ export default function GoogleAuthButton({ state, dispatch }) {
       <LoginDivContainer>
         <LoginCard>
           <ToggleBtn onClick={() => setIsToggled((val) => !val)}>
-            <img src={downArrow} alt="" />
+            <img data-isToggled={isToggled} src={downArrow} alt="" />
           </ToggleBtn>
           {profile ? (
             <ProfileDiv data-shouldExpand={isToggled}>
@@ -135,21 +135,18 @@ const LoginDivContainer = styled.div`
   flex-direction: column;
   align-items: flex-end;
 
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
   *[data-shouldExpand="false"] {
-    display: none;
+    // display: none;
+    opacity: 0;
+    translate: 0 -10px;
   }
   *[data-shouldExpand="true"] {
-    animation: fadeIn 1s;
+    opacity: 1;
+    translate: 0px 0px;
     z-index: 10;
+  }
+  img[data-isToggled="false"] {
+    rotate: 90deg;
   }
 `;
 const LoginCard = styled.div`
@@ -197,21 +194,6 @@ const ToggleBtn = styled.div`
   margin-inline-start: auto;
 
   z-index: 2;
-
-  img {
-    background: pink;
-
-    background: radial-gradient(
-      circle at 33% 100%,
-      #ff3be7 4%,
-      #ff3be7 28%,
-      #03ffe8 62%,
-      #f15245 85%,
-      #fed373
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
 `;
 
 const Btn = styled.button`
@@ -225,6 +207,5 @@ const Btn = styled.button`
 
   &:hover {
     background: rgb(82 0 255 / 90%);
-    box-shadow: 1px 1px 10px rgb(82 0 255 / 90%);
   }
 `;
