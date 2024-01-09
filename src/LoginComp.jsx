@@ -3,6 +3,7 @@ import styled from "styled-components";
 import "./App.css";
 import { googleLogout, useGoogleLogin } from "@react-oauth/google";
 import toast from "react-hot-toast";
+
 import { getPassword, addPassword } from "./Actions.js";
 import downArrow from "/angles-down-solid.svg";
 export default function GoogleAuthButton({ state, dispatch }) {
@@ -23,9 +24,14 @@ export default function GoogleAuthButton({ state, dispatch }) {
         .then((data) => {
           dispatch({
             type: "setHistory",
-            payload: data.passwords.map((ele, index) => {
-              return { id: ele.id, pass: ele.pass };
-            }),
+            payload: data.passwords
+              .map((ele, index) => {
+                return { id: ele.id, pass: ele.pass };
+              })
+              .reduce((output, current) => {
+                // for reverse order
+                return [current, ...output];
+              }, []),
           });
         })
         .catch((e) => console.log(e.message));
@@ -70,10 +76,10 @@ export default function GoogleAuthButton({ state, dispatch }) {
       <LoginDivContainer>
         <LoginCard>
           <ToggleBtn onClick={() => setIsToggled((val) => !val)}>
-            <img data-isToggled={isToggled} src={downArrow} alt="" />
+            <img data-istoggled={isToggled} src={downArrow} alt="" />
           </ToggleBtn>
           {profile ? (
-            <ProfileDiv data-shouldExpand={isToggled}>
+            <ProfileDiv data-shouldexpand={isToggled}>
               <Profile>
                 <img src={profile.picture} alt="" />
                 <span
@@ -104,7 +110,7 @@ export default function GoogleAuthButton({ state, dispatch }) {
               </Btn>
             </ProfileDiv>
           ) : (
-            <LoginDiv data-shouldExpand={isToggled}>
+            <LoginDiv data-shouldexpand={isToggled}>
               <Btn
                 className=""
                 onClick={() => {
@@ -135,17 +141,17 @@ const LoginDivContainer = styled.div`
   flex-direction: column;
   align-items: flex-end;
 
-  *[data-shouldExpand="false"] {
+  *[data-shouldexpand="false"] {
     // display: none;
     opacity: 0;
     translate: 0 -10px;
   }
-  *[data-shouldExpand="true"] {
+  *[data-shouldexpand="true"] {
     opacity: 1;
     translate: 0px 0px;
     z-index: 10;
   }
-  img[data-isToggled="false"] {
+  img[data-istoggled="false"] {
     rotate: 90deg;
   }
 `;

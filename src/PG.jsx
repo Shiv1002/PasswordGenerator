@@ -1,9 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react";
-
+import AddToHitoryCard from "./AddToHistoryCard";
 import { Toaster, toast } from "react-hot-toast";
 import bars_icon from "/bars-solid.svg";
 import CopyBtn from "./CopyBtn";
-import { addPassword } from "./Actions";
 
 const passwordSet = {
   Uppercase: [
@@ -97,10 +96,10 @@ const passwordSet = {
   ],
 };
 
-export default function PG({ state, dispatch }) {
-  const [password, setPassword] = useState("");
-
-  const { history, settings } = state;
+export default function PG(props) {
+  const { state, dispatch } = props;
+  const { password, history, settings } = state;
+  const [showAddToHistoryCard, setShowAddToHistoryCard] = useState(false);
 
   useEffect(() => {
     generate();
@@ -134,22 +133,22 @@ export default function PG({ state, dispatch }) {
       newPassword += newChar;
     }
     console.log("Password generated!");
-    setPassword(newPassword);
+    dispatch({
+      type: "setPassword",
+      payload: { name: "pass", val: newPassword },
+    });
   }
 
   function addHistory() {
     if (
-      password === "" ||
-      history.filter((ele) => ele.pass == password).length != 0
-    )
+      password.pass === "" ||
+      history.filter((ele) => ele.pass == password.pass).length != 0
+    ) {
+      toast.error("already in history");
       return;
-    const newPass = { id: history.length, pass: password };
-    dispatch({ type: "setHistory", payload: [newPass] });
+    }
 
-    if (!state.profile) return;
-    addPassword(state.profile.email, newPass)
-      .then((res) => console.log(res))
-      .catch((e) => console.log(e));
+    setShowAddToHistoryCard(true);
   }
 
   const handleSettingChange = (e) => {
@@ -171,7 +170,9 @@ export default function PG({ state, dispatch }) {
   return (
     <>
       <Toaster position="top-right" />
-
+      {showAddToHistoryCard ? (
+        <AddToHitoryCard setShow={setShowAddToHistoryCard} {...props} />
+      ) : null}
       <div id="pg-container-wrapper" className="show-pg show-history">
         <div id="pg-container">
           <div className="input-container">
@@ -179,16 +180,23 @@ export default function PG({ state, dispatch }) {
               <input
                 className="password-input"
                 type="text"
-                defaultValue={password}
+                defaultValue={password.pass}
                 disabled
               />
 
               <CopyBtn password={password} addHistory={addHistory} />
             </div>
-
-            <button className="primary-btn" onClick={generate}>
-              Generate
-            </button>
+            <div>
+              <button className="primary-btn" onClick={generate}>
+                Generate
+              </button>
+              <button
+                className="primary-btn"
+                onClick={() => addHistory(password, history)}
+              >
+                Add to History
+              </button>
+            </div>
           </div>
           <div className="setting-container">
             <div className="length-input">

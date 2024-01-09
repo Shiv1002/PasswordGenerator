@@ -7,8 +7,7 @@ export default function CopyBtn({ password, addHistory }) {
       <button
         onClick={() => {
           toast.success("Password copied!");
-          navigator.clipboard.writeText(password);
-          if (addHistory) addHistory();
+          navigator.clipboard.writeText(password.pass);
         }}
         className="copy-btn"
       >

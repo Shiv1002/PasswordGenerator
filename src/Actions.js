@@ -1,6 +1,11 @@
 const tc_email = "shiv@gmail.com";
 const tc_pass = "kym mall";
-const DB_URL = import.meta.env.VITE_DB_URL || "http://localhost:1212";
+
+import { v4 as uuidv4 } from "uuid";
+
+// const DB_URL = import.meta.env.VITE_DB_URL || "http://localhost:1212";
+const DB_URL = "http://localhost:1212";
+
 export const getPassword = async (email) => {
   return new Promise(async (resolve, reject) => {
     if (!email) reject("email undefined!");
@@ -33,9 +38,19 @@ export const addPassword = async (email, password) => {
         if (res.modifiedCount) {
           resolve("Password successfully added");
         } else {
-          reject("Error in DB");
+          reject("Error in Database");
         }
       })
       .catch((e) => reject(e.message));
   });
+};
+
+export const getNewPassword = (password) => {
+  return {
+    id: uuidv4(),
+    pass: password.pass,
+    passwordFor: password.passwordFor,
+    timestamp: new Date(),
+    important: password.important,
+  };
 };
