@@ -26,8 +26,8 @@ export function StateReducer(state, { type, payload }) {
     case "setHistory":
       // console.log(payload, state.history);
       return { ...state, history: [...payload, ...state.history] };
-    case "reset":
-      return { ...state, password: initialState.password };
+    case "logout":
+      return { ...state, history: [], profile: initialState.profile };
     default:
       console.log("No such actions");
       return { ...state };

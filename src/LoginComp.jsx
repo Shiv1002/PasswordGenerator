@@ -102,8 +102,7 @@ export default function GoogleAuthButton({ state, dispatch }) {
                   console.log("logging out!!");
                   toast.success("logged out!", { position: "top-center" });
                   googleLogout();
-
-                  dispatch({ type: "reset" });
+                  dispatch({ type: "logout" });
                 }}
               >
                 Logout

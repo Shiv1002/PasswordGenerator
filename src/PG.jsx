@@ -3,7 +3,6 @@ import AddToHitoryCard from "./AddToHistoryCard";
 import { Toaster, toast } from "react-hot-toast";
 import bars_icon from "/bars-solid.svg";
 import CopyBtn from "./CopyBtn";
-
 const passwordSet = {
   Uppercase: [
     "A",
@@ -184,7 +183,7 @@ export default function PG(props) {
                 disabled
               />
 
-              <CopyBtn password={password} addHistory={addHistory} />
+              <CopyBtn password={password.pass} addHistory={addHistory} />
             </div>
             <div>
               <button className="primary-btn" onClick={generate}>

@@ -45,12 +45,12 @@ export const addPassword = async (email, password) => {
   });
 };
 
-export const getNewPassword = (password) => {
+export const getNewPassword = (passObj) => {
   return {
     id: uuidv4(),
-    pass: password.pass,
-    passwordFor: password.passwordFor,
+    pass: passObj.pass,
+    passwordFor: passObj.passwordFor,
     timestamp: new Date(),
-    important: password.important,
+    important: passObj.important,
   };
 };

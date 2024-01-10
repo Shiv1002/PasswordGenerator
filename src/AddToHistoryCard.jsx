@@ -13,7 +13,6 @@ export default function AddToHistoryCard({ state, dispatch, setShow }) {
     }
 
     const newPass = getNewPassword(password);
-    console.log(newPass);
 
     dispatch({ type: "setHistory", payload: [newPass] });
 
