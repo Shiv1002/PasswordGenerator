@@ -185,7 +185,7 @@ export default function PG(props) {
 
               <CopyBtn password={password.pass} addHistory={addHistory} />
             </div>
-            <div>
+            <div className="password-input-btn">
               <button className="primary-btn" onClick={generate}>
                 Generate
               </button>
@@ -250,8 +250,19 @@ export default function PG(props) {
             <ul>
               {history.map((passEle) => {
                 return (
-                  <li key={passEle.id}>
-                    {passEle.pass} <CopyBtn password={passEle.pass} />
+                  <li
+                    key={passEle.id}
+                    style={
+                      passEle.important
+                        ? {
+                            color: "yellow",
+                          }
+                        : null
+                    }
+                  >
+                    <span>{passEle.passwordFor}</span> -{" "}
+                    <span>{passEle.pass} </span>
+                    <CopyBtn password={passEle.pass} />
                   </li>
                 );
               })}

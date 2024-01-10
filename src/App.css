@@ -33,7 +33,7 @@
     display: flex;
     /* padding: rem; */
     box-sizing: border-box;
-    font-size: x-large;
+    font-size: large;
     border: 2px solid var(--secondary);
     /* overflow: hidden; */
 }
@@ -67,7 +67,7 @@ overflow: hidden;
 .input-container{
     flex-grow: 1;
     flex-basis: 40%;
-    width: 80%;
+    width: 100%;
 }
 
 .setting-container{
@@ -108,7 +108,7 @@ box-sizing: border-box;
     background-color: #ffffff;
     color: black;
     padding: 1rem;
-    font-size: x-large;
+    font-size: large;
     font-weight: 600;
     font-family: 'Itim';
     letter-spacing: 2px;
@@ -131,15 +131,19 @@ fill: inherit
 }
 .primary-btn{
 margin: 1rem 0;
-padding: 1rem;
+padding: 0.8rem 1rem;
 border-radius: 30px;
 font-family: 'Itim';
-font-size: x-large;
+font-size: medium;
 color: white;
 border: 0;
 background-color: var(--secondary);
 }
 
+.password-input-btn{
+    display: flex;
+    justify-content: space-between;
+}
 
 .setting-container .length-input input{
     border: 1px solid black;
@@ -170,18 +174,17 @@ li,ul{
  */
  height: 100%;
  margin: 1rem 0;
- padding: 1.3rem;
  overflow: scroll;
   }
 
-  @media screen and (width<=992px){
+  /* @media screen and (width<=992px){
     :root,input,button{
         font-size: medium !important;
     }
     #pg-container-wrapper{
         font-size: medium;
     }
-  }
+  } */
   @media screen and (width<=786px){
     :root,input{
         font-size: small !important;
@@ -193,6 +196,9 @@ li,ul{
   }
   
   @media screen and (width<=576px){
+    .input-container{
+        width: 90%;
+    }
     .nav-container{
         display: block;
 
