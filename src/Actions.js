@@ -3,8 +3,8 @@ const tc_pass = "kym mall";
 
 import { v4 as uuidv4 } from "uuid";
 
-// const DB_URL = import.meta.env.VITE_DB_URL || "http://localhost:1212";
-const DB_URL = "http://localhost:1212";
+const DB_URL = import.meta.env.VITE_DB_URL || "http://localhost:1212";
+// const DB_URL = "http://localhost:1212";
 
 export const getPassword = async (email) => {
   return new Promise(async (resolve, reject) => {
