@@ -252,17 +252,25 @@ export default function PG(props) {
                 return (
                   <div
                     key={passEle.id}
-                    style={{
-                      display: "flex",
-                      alignItems: " center",
-                      justifyContent: "space-between",
-                    }}
+                    style={passEle.important ? { color: "yellow" } : null}
                   >
-                    <div>{passEle.passwordFor}</div> -{" "}
-                    <div className="password-field">
-                      <span>{passEle.pass}</span>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: " center",
+                        justifyContent: "space-between",
+                        flexGrow: 1,
+                      }}
+                      title={`password for ${passEle.passwordFor} - ${
+                        passEle.important ? "IMPORTANT" : ""
+                      }`}
+                    >
+                      <div>{passEle.passwordFor}</div> -{" "}
+                      <div className="password-field">
+                        <span>{passEle.pass}</span>
+                      </div>
+                      <CopyBtn password={passEle.pass} />
                     </div>
-                    <CopyBtn password={passEle.pass} />
                   </div>
                 );
               })}
