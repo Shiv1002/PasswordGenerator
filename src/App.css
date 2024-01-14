@@ -166,7 +166,15 @@ li,ul{
     list-style: none;
 
 }
-
+.password-field{
+    opacity: 0.5;
+    text-decoration: wavy;
+    text-decoration-line: line-through;
+}
+.password-field:hover{
+opacity: 1;
+text-decoration: none;
+}
 
 
   .pass-list{
@@ -257,6 +265,7 @@ li,ul{
   ::-webkit-scrollbar{
     width: 5px;
     background-color: transparent;
+    height: 0;
   }
   ::-webkit-scrollbar-thumb{
     background-color: rgb(200, 200, 200);

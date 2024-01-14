@@ -250,20 +250,20 @@ export default function PG(props) {
             <ul>
               {history.map((passEle) => {
                 return (
-                  <li
+                  <div
                     key={passEle.id}
-                    style={
-                      passEle.important
-                        ? {
-                            color: "yellow",
-                          }
-                        : null
-                    }
+                    style={{
+                      display: "flex",
+                      alignItems: " center",
+                      justifyContent: "space-between",
+                    }}
                   >
-                    <span>{passEle.passwordFor}</span> -{" "}
-                    <span>{passEle.pass} </span>
+                    <div>{passEle.passwordFor}</div> -{" "}
+                    <div className="password-field">
+                      <span>{passEle.pass}</span>
+                    </div>
                     <CopyBtn password={passEle.pass} />
-                  </li>
+                  </div>
                 );
               })}
             </ul>
