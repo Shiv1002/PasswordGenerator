@@ -39,7 +39,7 @@ export default function GoogleAuthButton({ state, dispatch }) {
     fetchUserPassword();
 
     return () => {
-      dispatch({ type: "reset" });
+      dispatch({ type: "logout" });
     };
   }, [profile]);
 

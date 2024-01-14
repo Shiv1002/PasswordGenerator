@@ -29,7 +29,7 @@ export function StateReducer(state, { type, payload }) {
     case "logout":
       return { ...state, history: [], profile: initialState.profile };
     default:
-      console.log("No such actions");
+      console.log("No such actions", type);
       return { ...state };
   }
 }
