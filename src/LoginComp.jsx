@@ -1,32 +1,76 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+
 import "./App.css";
 import { googleLogout, useGoogleLogin } from "@react-oauth/google";
 import toast from "react-hot-toast";
 
 import { getPassword, addPassword } from "./Actions.js";
 import downArrow from "/angles-down-solid.svg";
+import styled from "styled-components";
+import Cookies from "js-cookie";
+
 export default function GoogleAuthButton({ state, dispatch }) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(Cookies.get("user-acc-token") || null);
+
   const [isToggled, setIsToggled] = useState(false);
   const { profile } = state;
 
   const login = useGoogleLogin({
-    onSuccess: (res) => setUser(res),
+    onSuccess: (res) => {
+      setUser(res.access_token);
+      Cookies.set("user-acc-token", res.access_token, {
+        expires: 1,
+      });
+    },
     onError: (err) => console.log(err.message),
     onNonOAuthError: (noAuthErr) => console.log(noAuthErr.message),
   });
+
+  useEffect(() => {
+    if (!user) return;
+
+    const fetchUserData = async () => {
+      await fetch(
+        `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user}`,
+        {
+          headers: {
+            Authorization: `Bearer ${user}`,
+            Accept: "application/json",
+          },
+        }
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          toast.success("User logged!", { position: "top-center" });
+          //set profile
+          // to ui profile data
+          dispatch({ type: "setProfile", payload: data });
+        })
+        .catch((e) => {
+          setUser(null);
+          toast.error("Something went wrong!", { position: "top-center" });
+          console.log("Error ocurred");
+        });
+    };
+    fetchUserData();
+  }, [user]);
 
   useEffect(() => {
     if (!profile) return;
     const fetchUserPassword = async () => {
       await getPassword(profile.email)
         .then((data) => {
+          console.log(data);
           dispatch({
             type: "setHistory",
             payload: data.passwords
               .map((ele, index) => {
-                return { id: ele.id, pass: ele.pass };
+                return {
+                  id: ele.id,
+                  pass: ele.pass,
+                  passwordFor: ele.passwordFor,
+                  important: ele.important,
+                };
               })
               .reduce((output, current) => {
                 // for reverse order
@@ -42,34 +86,6 @@ export default function GoogleAuthButton({ state, dispatch }) {
       dispatch({ type: "logout" });
     };
   }, [profile]);
-
-  useEffect(() => {
-    if (!user) return;
-
-    const fetchUserData = async () => {
-      await fetch(
-        `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
-        {
-          headers: {
-            Authorization: `Bearer ${user.access_token}`,
-            Accept: "application/json",
-          },
-        }
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          toast.success("User logged!", { position: "top-center" });
-          //set profile
-          // to ui profile data
-          dispatch({ type: "setProfile", payload: data });
-        })
-        .catch((e) => {
-          toast.error("Something went wrong!", { position: "top-center" });
-          console.log("Error ocurred");
-        });
-    };
-    fetchUserData();
-  }, [user]);
 
   return (
     <>
@@ -103,6 +119,8 @@ export default function GoogleAuthButton({ state, dispatch }) {
                   toast.success("logged out!", { position: "top-center" });
                   googleLogout();
                   dispatch({ type: "logout" });
+                  setUser(null);
+                  Cookies.remove("user-acc-token");
                 }}
               >
                 Logout
