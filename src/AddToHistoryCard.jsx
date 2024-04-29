@@ -40,16 +40,27 @@ export default function AddToHistoryCard({ state, dispatch, setShow }) {
   return (
     <CardContainer>
       <Card>
-        <CloseBtn onClick={() => setShow(false)}>❌</CloseBtn>
+        <CloseBtn onClick={() => setShow(false)} title="Close">
+          ❌
+        </CloseBtn>
         <h3>Edit Password ✍ </h3>
         <EditContainer>
           <label htmlFor="Password">Password</label>
-          <input type="text" disabled value={password.pass} />
+          <InputElement
+            id="Password"
+            type="text"
+            name="Password"
+            disabled
+            value={password.pass}
+          />
           <label htmlFor="Passwordfor">Password for :- </label>
-          <input
+          <InputElement
+            id="Passwordfor"
+            name="PasswordFor"
             type="text"
             placeholder="google.com"
             value={password.passwordFor}
+            autoFocus
             onChange={(e) => {
               dispatch({
                 type: "setPassword",
@@ -73,7 +84,14 @@ export default function AddToHistoryCard({ state, dispatch, setShow }) {
               }
             />
           </ImpDiv>
-          <button onClick={shouldAddToHistory}>Add</button>
+          <InputElement
+            type="button"
+            style={{
+              padding: "0.6rem",
+            }}
+            onClick={shouldAddToHistory}
+            value="Add"
+          />
         </EditContainer>
       </Card>
     </CardContainer>
@@ -111,6 +129,7 @@ const CloseBtn = styled.div`
   background: black;
   border-radius: 50%;
   padding: 0.3rem;
+  cursor: pointer;
 `;
 
 const EditContainer = styled.div`
@@ -130,4 +149,17 @@ const EditContainer = styled.div`
 const ImpDiv = styled.div`
   display: flex;
   align-items: center;
+`;
+
+const InputElement = styled.input`
+  font-family: inherit;
+  border: 1px solid transparent;
+  border-radius: 1rem;
+  outline: 1px solid gray;
+  padding: 1rem;
+  font-size: medium;
+  margin: auto 0;
+  &:hover {
+    border: 1px solid #00000070;
+  }
 `;
