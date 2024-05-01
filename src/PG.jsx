@@ -245,7 +245,9 @@ export default function PG(props) {
           </div>
         </div>
         <div id="history-container">
-          <div>History</div>
+          <div className="" style={{ fontSize: "x-large" }}>
+            History
+          </div>
           <div className="pass-list">
             <ul>
               {history.map((passEle) => {

@@ -104,6 +104,20 @@ const Div = styled.div`
     animation-delay: 0s;
     animation-duration: 11s;
   }
+  .circles li:nth-child(11) {
+    left: 10%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 3s;
+    animation-duration: 40s;
+  }
+  .circles li:nth-child(12) {
+    left: 30%;
+    width: 80px;
+    height: 80px;
+    animation-delay: 10s;
+    animation-duration: 20s;
+  }
 
   @keyframes animate {
     0% {
@@ -115,7 +129,7 @@ const Div = styled.div`
     100% {
       transform: translateY(-1000px) rotate(720deg);
       opacity: 0;
-      border-radius: 80%;
+      border-radius: 50%;
     }
   }
 `;

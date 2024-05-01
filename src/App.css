@@ -26,16 +26,16 @@
 #pg-container-wrapper{
     position: relative;
     color: white;
-    width: 75%;
+    width: 60%;
     height: 60%;
     aspect-ratio: 20/10;
     border-radius: 30px;
     display: flex;
     /* padding: rem; */
     box-sizing: border-box;
-    font-size: large;
+    /* font-size: large; */
     border: 2px solid var(--secondary);
-    /* overflow: hidden; */
+    /* overflow: scroll; */
 }
 
 
@@ -55,7 +55,7 @@ background-color: #ffffff;
 color: black;
 border-radius: 30px 0 0 30px ;
 box-shadow: -10px 15px 20px 0px var(--secondary);
-overflow: hidden;
+overflow: scroll;
 }
 
 .nav-container{
@@ -185,21 +185,20 @@ text-decoration: none;
  overflow: scroll;
   }
 
-  /* @media screen and (width<=992px){
+  @media screen and (width<=992px){
     :root,input,button{
-        font-size: medium !important;
+    font-size: small !important;
     }
     #pg-container-wrapper{
         font-size: medium;
     }
-  } */
+  }
   @media screen and (width<=786px){
     :root,input{
         font-size: small !important;
     }
     #pg-container-wrapper{
-        font-size: medium;
-        
+        width: 75%;
     }
   }
   
